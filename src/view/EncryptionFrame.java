@@ -19,6 +19,7 @@ public class EncryptionFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static EncryptionFrame instance;
 	
+	public JTextField tfExponent, tfModule;
 	public JTextArea textAreaMessage, textAreaCypher;
 	public JButton buttonOK;
 	
@@ -42,12 +43,14 @@ public class EncryptionFrame extends JFrame {
 		JPanel panelNorth1 = new JPanel();
 		panelNorth1.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		panelNorth1.add(new JLabel("exposant de chiffrement \t"));
-		panelNorth1.add(new JTextField(10));
+		tfExponent = new JTextField(10);
+		panelNorth1.add(tfExponent);
 		
 		JPanel panelNorth2 = new JPanel();
 		panelNorth2.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		panelNorth2.add(new JLabel("saisir le module n \t"));
-		panelNorth2.add(new JTextField(10));
+		tfModule = new JTextField(10);
+		panelNorth2.add(tfModule);
 		
 		panelNorth.add(panelNorth1);
 		panelNorth.add(panelNorth2);

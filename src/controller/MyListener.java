@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Map;
 import java.util.Random;
 
+import model.RSA;
 import model.Share;
 import view.DeciphermentFrame;
 import view.EncryptionFrame;
@@ -37,9 +38,17 @@ public class MyListener implements ActionListener {
 		} else if(src==MainWindow.getInstance().buttonAssembly) {
 			//TODO
 		} else if(src==EncryptionFrame.getInstance().buttonOK) {
-			//TODO
+			BigInteger exponent = new BigInteger(EncryptionFrame.getInstance().tfExponent.getText());
+			BigInteger module = new BigInteger(EncryptionFrame.getInstance().tfModule.getText());
+			String message = EncryptionFrame.getInstance().textAreaMessage.getText();
+			BigInteger cypher = RSA.chiffrementRSA(message, exponent, module);
+			EncryptionFrame.getInstance().textAreaCypher.setText(cypher.toString());
 		} else if(src==DeciphermentFrame.getInstance().buttonOK) {
-			//TODO
+			BigInteger exponent = new BigInteger(DeciphermentFrame.getInstance().tfExponent.getText());
+			BigInteger module = new BigInteger(DeciphermentFrame.getInstance().tfModule.getText());
+			BigInteger cypher = new BigInteger(DeciphermentFrame.getInstance().textAreaCypher.getText());
+			String message = RSA.dechiffrementRSA(cypher, exponent, module);
+			DeciphermentFrame.getInstance().textAreaMessage.setText(message);
 		} else if(src==SharingFrame.getInstance().buttonRandom) {
 			SharingFrame.getInstance().tfPrime.setText(
 					new String(
