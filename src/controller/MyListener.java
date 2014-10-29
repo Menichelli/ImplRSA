@@ -36,6 +36,8 @@ public class MyListener implements ActionListener {
 		} else if(src==MainWindow.getInstance().buttonSharing) {
 			SharingFrame.getInstance().setVisible(true);
 		} else if(src==MainWindow.getInstance().buttonAssembly) {
+			
+			
 			//TODO
 		} else if(src==EncryptionFrame.getInstance().buttonOK) {
 			BigInteger exponent = new BigInteger(EncryptionFrame.getInstance().tfExponent.getText());
