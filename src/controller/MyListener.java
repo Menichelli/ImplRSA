@@ -77,28 +77,31 @@ public class MyListener implements ActionListener {
 			JOptionPane.showMessageDialog(EncryptionFrame.getInstance(), "Module incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		String message = EncryptionFrame.getInstance().textAreaMessage.getText();
 		if(message==null || message.length()==0) {
 			JOptionPane.showMessageDialog(EncryptionFrame.getInstance(), "Message incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
-		} else {
-			BigInteger cypher = RSA.chiffrementRSA(message, exponent, module);
-			EncryptionFrame.getInstance().textAreaCypher.setText(cypher.toString());
 		}
+		if(new BigInteger(message.getBytes()).compareTo(module)>=0) {
+			JOptionPane.showMessageDialog(EncryptionFrame.getInstance(), "Le message est trop long pour ce module!","Erreur!",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		BigInteger cypher = RSA.chiffrementRSA(message, exponent, module);
+		EncryptionFrame.getInstance().textAreaCypher.setText(cypher.toString());
 	}
 
 	private static void handleDecipherment() {
 		BigInteger exponent=null, module=null, cypher=null;
 		try {
-			exponent = new BigInteger(EncryptionFrame.getInstance().tfExponent.getText());
+			exponent = new BigInteger(DeciphermentFrame.getInstance().tfExponent.getText());
 			if(exponent==null || exponent.compareTo(new BigInteger("0"))<=0) throw new IllegalStateException();
 		} catch(Exception e) {
 			JOptionPane.showMessageDialog(DeciphermentFrame.getInstance(), "Exposant incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		try {
-			module = new BigInteger(EncryptionFrame.getInstance().tfModule.getText());
+			module = new BigInteger(DeciphermentFrame.getInstance().tfModule.getText());
 			if(module==null || module.compareTo(new BigInteger("0"))<=0) throw new IllegalStateException();
 		} catch(Exception e) {
 			JOptionPane.showMessageDialog(DeciphermentFrame.getInstance(), "Module incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
@@ -128,7 +131,7 @@ public class MyListener implements ActionListener {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Nombre premier incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		try {
 			totalShares = Integer.parseInt(SharingFrame.getInstance().tfTotalShares.getText());
 			if(totalShares<=1) throw new IllegalArgumentException();
@@ -136,7 +139,7 @@ public class MyListener implements ActionListener {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Nombre de personnes total incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		try {
 			minimalShares = Integer.parseInt(SharingFrame.getInstance().tfMinimalShares.getText());
 			if(minimalShares<=1) throw new IllegalArgumentException();
@@ -144,18 +147,23 @@ public class MyListener implements ActionListener {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Nombre de personnes minimal incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		if(minimalShares>totalShares) {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Nombre de personnes minimal doit etre inferieur ou egal au nombre de personnes total!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		String message = SharingFrame.getInstance().textAreaMessage.getText();
 		if (message.length()==0) {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Message incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
+		if(new BigInteger(message.getBytes()).compareTo(primeNumber)>=0) {
+			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Le message est trop long!","Erreur!",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		Map<Integer,BigInteger> res = Share.shareMessage(primeNumber, totalShares, minimalShares, message);
 		SharingFrame.getInstance().textAreaKeys.setText("");
 		for(Integer key : res.keySet()) {
@@ -169,7 +177,15 @@ public class MyListener implements ActionListener {
 			JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Liste cles/valeurs incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
+		BigInteger primeNumber = null;
+		try {
+			primeNumber = new BigInteger(AssemblyFrame.getInstance().tfPrimeNumber.getText());
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(AssemblyFrame.getInstance(), "Nombre premier incorrect!","Erreur!",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		Map<Integer, BigInteger> mapKV = new HashMap<Integer, BigInteger>();
 		for(String s : keys.split("\n")) {
 			Pattern p = Pattern.compile("\\d+");
@@ -182,7 +198,10 @@ public class MyListener implements ActionListener {
 				swtch=!swtch;
 			}
 		}
-		String message = Assembly.assembler(mapKV);
+
+
+
+		String message = Assembly.assembler(mapKV,primeNumber);
 		AssemblyFrame.getInstance().textAreaMessage.setText(message);
 	}
 }

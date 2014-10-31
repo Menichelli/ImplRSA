@@ -28,6 +28,7 @@ public class SharingFrame extends JFrame {
 		this.setSize(450, 400);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
+		this.setAlwaysOnTop(true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		JPanel panel = new JPanel();

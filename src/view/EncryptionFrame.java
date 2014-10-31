@@ -28,6 +28,7 @@ public class EncryptionFrame extends JFrame {
 		this.setSize(300, 350);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
+		this.setAlwaysOnTop(true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();

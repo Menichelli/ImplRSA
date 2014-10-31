@@ -2,7 +2,6 @@ package model;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.Map;
 
 import model.exception.NoSquareException;
@@ -22,7 +21,7 @@ public class Assembly {
 	 * @param t taille de la matrice
 	 * @return
 	 */
-	private static BigInteger[][] createC(int t){
+	private static BigInteger[][] createC(int t) {
 		BigInteger[][] mat = new BigInteger[t][t];
 		for(int i = 0 ; i < t ; i++){
 			for(int j = 0 ; j < t ; j++){
@@ -38,11 +37,10 @@ public class Assembly {
 	 * @param couples
 	 * @return
 	 */
-	public static String assembler(Map<Integer,BigInteger> mapKV){
-		int t =mapKV.size();
-		Map<Integer,BigDecimal> Sres = new HashMap<Integer, BigDecimal>();
-		BigDecimal[][] Cinverse = new BigDecimal[t][t];
-
+	public static String assembler(Map<Integer,BigInteger> mapKV, BigInteger n){
+		int t = mapKV.keySet().size();
+		BigDecimal[][] Cinverse = null;
+		
 		Matrix C1 = new Matrix(createC(t));
 		try {
 			if(MatrixMathematics.determinant(C1) != BigInteger.valueOf(0)) {
@@ -52,13 +50,13 @@ public class Assembly {
 			e.printStackTrace();
 		}
 
-		BigDecimal M = new BigDecimal("0.0");
+		BigDecimal msg = new BigDecimal("0.0");
 		
 		for(Integer key : mapKV.keySet()){
-			M=M.add(Cinverse[0][key.intValue()-1].multiply(new BigDecimal(mapKV.get(key.intValue()))));//mod
+			msg=msg.add(Cinverse[0][key.intValue()-1].multiply(new BigDecimal(mapKV.get(key))));//mod
 		}
 		
-		String message = new String(M.toBigInteger().toByteArray());
+		String message = new String(msg.toBigInteger().mod(n).toByteArray());
 		return message;
 	}
 

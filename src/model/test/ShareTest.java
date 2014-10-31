@@ -30,6 +30,8 @@ public class ShareTest {
 			System.out.println("cle: "+i+"\tvaleur: "+ret.get(i));
 		}
 		
+		
+		
 	}
 
 }
