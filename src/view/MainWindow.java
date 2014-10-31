@@ -1,10 +1,12 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -35,8 +37,6 @@ public class MainWindow extends JFrame {
 		GridLayout layout = new GridLayout(2, 2, 10, 10);
 		panel.setLayout(layout);
 		
-		this.setContentPane(panel);
-		
 		buttonEncryption = new JButton("Chiffrement");
 		buttonDecipherment = new JButton("Dechiffrement");
 		buttonSharing = new JButton("Partage");
@@ -52,7 +52,18 @@ public class MainWindow extends JFrame {
 		panel.add(buttonSharing);
 		panel.add(buttonAssembly);
 		
-		this.setSize(300, 200);
+		JPanel panelSud = new JPanel();
+		JTextField tfNames = new JTextField();
+		tfNames.setText("Mathieu GRONDIN, Christophe MENICHELLI, Corentin RAOULT");
+		tfNames.setEditable(false);
+		panelSud.add(tfNames);
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(panel, BorderLayout.CENTER);
+		mainPanel.add(panelSud, BorderLayout.SOUTH);
+		this.setContentPane(mainPanel);
+		this.setSize(400, 250);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

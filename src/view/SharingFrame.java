@@ -89,7 +89,7 @@ public class SharingFrame extends JFrame {
 		
 		//SOUTH
 		JPanel panelSouth = new JPanel();
-		buttonOK = new JButton("Dechiffrer");
+		buttonOK = new JButton("Partager");
 		buttonOK.addActionListener(MyListener.getInstance());
 		panelSouth.add(buttonOK);
 

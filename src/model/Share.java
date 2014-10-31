@@ -22,7 +22,7 @@ public class Share {
 		BigInteger[] returnArray = new BigInteger[n];
 		Random random = new Random();
 		for (int index = 0; index < n; index++) {
-			returnArray[index] =  new BigInteger(128, random);
+			returnArray[index] =  new BigInteger(1024, random);
 		}
 		return returnArray;
 	}

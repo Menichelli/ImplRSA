@@ -41,15 +41,15 @@ public class AssemblyFrame extends JFrame {
 		
 		//--CENTER1
 		JPanel panelCenter1 = new JPanel();
-		panelCenter1.add(new JLabel("saisir les ensembles de cle/valeur",JLabel.CENTER));
-		textAreaKeys = new JTextArea(4, 35);
+		panelCenter1.add(new JLabel("Saisir les ensembles de cle/valeur",JLabel.CENTER));
+		textAreaKeys = new JTextArea(6, 35);
 		JScrollPane scrollAreaKeys = new JScrollPane(textAreaKeys);
 		panelCenter1.add(scrollAreaKeys);
 		
 		//--CENTER2
 		JPanel panelCenter2 = new JPanel();
-		panelCenter2.add(new JLabel("Liste des couples (argument,valeur)",JLabel.CENTER));
-		textAreaMessage = new JTextArea(4, 35);
+		panelCenter2.add(new JLabel("Message",JLabel.CENTER));
+		textAreaMessage = new JTextArea(6, 35);
 		textAreaMessage.setEditable(false);
 		JScrollPane scrollAreaMessage = new JScrollPane(textAreaMessage);
 		panelCenter2.add(scrollAreaMessage);
