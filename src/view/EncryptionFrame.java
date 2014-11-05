@@ -32,7 +32,7 @@ public class EncryptionFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		BorderLayout layout = new BorderLayout(30, 10);
+		BorderLayout layout = new BorderLayout(0, 0);
 		panel.setLayout(layout);
 		
 		this.setContentPane(panel);
@@ -43,13 +43,13 @@ public class EncryptionFrame extends JFrame {
 		
 		JPanel panelNorth1 = new JPanel();
 		panelNorth1.setLayout(new FlowLayout(FlowLayout.TRAILING));
-		panelNorth1.add(new JLabel("exposant de chiffrement \t"));
+		panelNorth1.add(new JLabel("exposant de chiffrement"));
 		tfExponent = new JTextField(10);
 		panelNorth1.add(tfExponent);
 		
 		JPanel panelNorth2 = new JPanel();
 		panelNorth2.setLayout(new FlowLayout(FlowLayout.TRAILING));
-		panelNorth2.add(new JLabel("saisir le module n \t"));
+		panelNorth2.add(new JLabel("saisir le module n"));
 		tfModule = new JTextField(10);
 		panelNorth2.add(tfModule);
 		

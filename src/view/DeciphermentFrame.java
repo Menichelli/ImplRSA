@@ -21,18 +21,18 @@ public class DeciphermentFrame extends JFrame {
 
 	public JTextField tfExponent,tfModule;
 	public JTextArea textAreaMessage, textAreaCypher;
-	public JButton buttonOK;
+	public JButton buttonOK,buttonCopyModule,buttonCopyCypher;
 
 	private DeciphermentFrame() {
 		this.setTitle("Dechiffrement RSA");
-		this.setSize(310, 350);
+		this.setSize(325, 350);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setAlwaysOnTop(true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		JPanel panel = new JPanel();
-		BorderLayout layout = new BorderLayout(30, 10);
+		BorderLayout layout = new BorderLayout(0, 0);
 		panel.setLayout(layout);
 
 		this.setContentPane(panel);
@@ -49,17 +49,29 @@ public class DeciphermentFrame extends JFrame {
 		
 		JPanel panelNorth2 = new JPanel();
 		panelNorth2.setLayout(new FlowLayout(FlowLayout.TRAILING));
-		panelNorth2.add(new JLabel("saisir le module n"));
+		JPanel panelNorth21 = new JPanel();
+		panelNorth21.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		buttonCopyModule = new JButton("Copier");
+		buttonCopyModule.addActionListener(MyListener.getInstance());
+		panelNorth21.add(buttonCopyModule);
+		panelNorth21.add(new JLabel("saisir le module n"));
 		tfModule = new JTextField(10);
-		panelNorth2.add(tfModule);
+		panelNorth21.add(tfModule);
+		panelNorth2.add(panelNorth21);
 		
 		panelNorth.add(panelNorth1);
 		panelNorth.add(panelNorth2);
 
 		//CENTER PANEL
 		JPanel panelCenter = new JPanel();
-		panelCenter.add(new JLabel("Saisir le message chiffre"));
-		textAreaCypher = new JTextArea(3, 24);
+		JPanel panelCenter1 = new JPanel();
+		panelCenter1.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		buttonCopyCypher = new JButton("Copier");
+		buttonCopyCypher.addActionListener(MyListener.getInstance());
+		panelCenter1.add(buttonCopyCypher);
+		panelCenter1.add(new JLabel("Saisir le message chiffre"));
+		panelCenter.add(panelCenter1);
+		textAreaCypher = new JTextArea(2, 24);
 		JScrollPane scrollAreaCypher = new JScrollPane(textAreaCypher);
 		panelCenter.add(scrollAreaCypher);
 		panelCenter.add(new JLabel(""));

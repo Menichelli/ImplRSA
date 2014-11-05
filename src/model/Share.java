@@ -65,7 +65,7 @@ public class Share {
 		for(int cle=1; cle<=totalShares;cle++){
 			ret.put(new Integer(cle), computeS(cle,msg,minimalShares,primeNumber,randomFactors));
 		}
-		displaySx(randomFactors, msg, minimalShares);
+//		displaySx(randomFactors, msg, minimalShares);
 		return  ret;
 	}
 	

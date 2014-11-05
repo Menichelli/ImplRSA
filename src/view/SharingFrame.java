@@ -19,7 +19,7 @@ public class SharingFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static SharingFrame instance;
 	
-	public JTextField tfPrime, tfMinimalShares, tfTotalShares;
+	public JTextField tfPrimeNumber, tfMinimalShares, tfTotalShares;
 	public JTextArea textAreaMessage, textAreaKeys;
 	public JButton buttonOK,buttonRandom;
 
@@ -47,8 +47,8 @@ public class SharingFrame extends JFrame {
 		buttonRandom.addActionListener(MyListener.getInstance());
 		panelNorth1.add(buttonRandom);
 		panelNorth1.add(new JLabel("saisir un grand nombre premier"));
-		tfPrime = new JTextField(6);
-		panelNorth1.add(tfPrime);
+		tfPrimeNumber = new JTextField(6);
+		panelNorth1.add(tfPrimeNumber);
 		
 		JPanel panelNorth2 = new JPanel();
 		panelNorth2.setLayout(new FlowLayout(FlowLayout.TRAILING));

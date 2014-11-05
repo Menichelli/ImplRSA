@@ -39,22 +39,34 @@ public class MyListener implements ActionListener {
 		try {
 			if(src==MainWindow.getInstance().buttonEncryption) {
 				EncryptionFrame.getInstance().setVisible(true);
+				EncryptionFrame.getInstance().toFront();
 			} else if(src==MainWindow.getInstance().buttonDecipherment) {
 				DeciphermentFrame.getInstance().setVisible(true);
+				DeciphermentFrame.getInstance().toFront();
 			} else if(src==MainWindow.getInstance().buttonSharing) {
 				SharingFrame.getInstance().setVisible(true);
+				SharingFrame.getInstance().toFront();
 			} else if(src==MainWindow.getInstance().buttonAssembly) {
 				AssemblyFrame.getInstance().setVisible(true);
+				AssemblyFrame.getInstance().toFront();
 			} else if(src==EncryptionFrame.getInstance().buttonOK) {
 				handleEncryption();
 			} else if(src==DeciphermentFrame.getInstance().buttonOK) {
 				handleDecipherment();
+			} else if(src==DeciphermentFrame.getInstance().buttonCopyModule) {
+				DeciphermentFrame.getInstance().tfModule.setText(EncryptionFrame.getInstance().tfModule.getText());
+			} else if(src==DeciphermentFrame.getInstance().buttonCopyCypher) {
+				DeciphermentFrame.getInstance().textAreaCypher.setText(EncryptionFrame.getInstance().textAreaCypher.getText());
 			} else if(src==SharingFrame.getInstance().buttonRandom) {
-				SharingFrame.getInstance().tfPrime.setText(new String(BigInteger.probablePrime(PRIME_LENGHT, new Random()).toString()));
+				SharingFrame.getInstance().tfPrimeNumber.setText(new String(BigInteger.probablePrime(PRIME_LENGHT, new Random()).toString()));
 			} else if(src==SharingFrame.getInstance().buttonOK) {
 				handleSharing();
 			} else if(src==AssemblyFrame.getInstance().buttonOK) {
 				handleAssembly();
+			} else if(src==AssemblyFrame.getInstance().buttonCopyPrime) {
+				AssemblyFrame.getInstance().tfPrimeNumber.setText(SharingFrame.getInstance().tfPrimeNumber.getText());
+			} else if(src==AssemblyFrame.getInstance().buttonCopyKeys) {
+				AssemblyFrame.getInstance().textAreaKeys.setText(SharingFrame.getInstance().textAreaKeys.getText());
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -122,7 +134,7 @@ public class MyListener implements ActionListener {
 		BigInteger primeNumber=null;
 		int totalShares=0, minimalShares=0;
 		try {
-			primeNumber = new BigInteger(SharingFrame.getInstance().tfPrime.getText());
+			primeNumber = new BigInteger(SharingFrame.getInstance().tfPrimeNumber.getText());
 			if(!primeNumber.isProbablePrime(1000)) {
 				JOptionPane.showMessageDialog(SharingFrame.getInstance(), "Le nombre saisi ne semble pas premier!","Erreur!",JOptionPane.ERROR_MESSAGE);
 				return;
